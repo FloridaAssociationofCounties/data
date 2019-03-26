@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+<head>
+  
+  <meta charset="utf-8">
+  <meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible'>
+  <meta content='width=device-width' name='viewport'>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="FAC Research">
+  <meta name="author" content="Florida Association of Counties">
+  <meta name="robots" content="noindex">
+  
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+  <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/c3/0.4.14/c3.js"></script>
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/c3/0.4.14/c3.min.js"></script>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/c3/0.4.14/c3.css" rel="stylesheet" type="text/css">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/c3/0.4.14/c3.min.css" rel="stylesheet" type="text/css">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  
+  <style>
+    @-webkit-keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
+    @-moz-keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
+    @-o-keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
+    @keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
+
+    .fade-in {
+      -webkit-animation: fadeIn ease-in 1;
+      -moz-animation: fadeIn ease-in 1;
+      -o-animation: fadeIn ease-in 1;
+      animation: fadeIn ease-in 1;
+      -webkit-animation-fill-mode: forwards;
+      -moz-animation-fill-mode: forwards;
+      -o-animation-fill-mode: forwards;
+      animation-fill-mode: forwards;
+      -webkit-animation-duration: 0.8s;
+      -moz-animation-duration: 0.8s;
+      -o-animation-duration: 0.8s;
+      animation-duration: 0.8s;
+    }
+
+    #share-buttons img {
+      width: 35px;
+      padding: 5px;
+      border: 0;
+      box-shadow: rgb(0, 0, 0);
+      display: inline;
+    }
+    
+    #revenue {
+      background-image: url('https://facresearch.com/wp-content/uploads/2019/03/FAC-logo.png');
+      background-repeat: no-repeat;
+      background-size: 30%;
+      background-position: center;
+      background-color: white;
+    }
+
+    #chart {
+      background-image: url('https://facresearch.com/wp-content/uploads/2019/03/FAC-logo.png');
+      background-repeat: no-repeat;
+      background-size: 10%;
+      background-position: 50% 10%;
+      width: 100%;
+      height: 100%;
+    }
+
+  </style>
+
+</head>
+<body>
+
+  <nav class="navbar navbar-default navbar-static" style="text-align: center;">
+    <div class="navbar-header collapse navbar-collapse js-navbar-collapse">
+        <a class="navbar-brand" href="index.php"><b>County Government Revenues</b></a>
+    </div>
+    <ul class="nav navbar-nav">
+        <li class="active dropdown">
+            <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="font-size: 18px"><b>Alachua County</b>
+                <span class="caret"></span></a>
+            <ul class="dropdown-menu pre-scrollable">
+                <li><a href="Alachua.php">Alachua County</a></li>
+                <li><a href="Baker.php">Baker County</a></li>
+                <li><a href="Bay.php">Bay County</a></li>
+                <li><a href="Bradford.php">Bradford County</a></li>
+                <li><a href="Brevard.php">Brevard County</a></li>
+                <li><a href="Broward.php">Broward County</a></li>
+                <li><a href="Calhoun.php">Calhoun County</a></li>
+                <li><a href="Charlotte.php">Charlotte County</a></li>
+                <li><a href="Citrus.php">Citrus County</a></li>
+                <li><a href="Clay.php">Clay County</a></li>
+                <li><a href="Collier.php">Collier County</a></li>
+                <li><a href="Columbia.php">Columbia County</a></li>
+                <li><a href="Miami-Dade.php">Miami-Dade County</a></li>
+                <li><a href="DeSoto.php">DeSoto County</a></li>
+                <li><a href="Dixie.php">Dixie County</a></li>
+                <li><a href="Duval.php">Duval County</a></li>
+                <li><a href="Escambia.php">Escambia County</a></li>
+                <li><a href="Flagler.php">Flagler County</a></li>
+                <li><a href="Franklin.php">Franklin County</a></li>
+                <li><a href="Gadsden.php">Gadsden County</a></li>
+                <li><a href="Gilchrist.php">Gilchrist County</a></li>
+                <li><a href="Glades.php">Glades County</a></li>
+                <li><a href="Gulf.php">Gulf County</a></li>
+                <li><a href="Hamilton.php">Hamilton County</a></li>
+                <li><a href="Hardee.php">Hardee County</a></li>
+                <li><a href="Hendry.php">Hendry County</a></li>
+                <li><a href="Hernando.php">Hernando County</a></li>
+                <li><a href="Highlands.php">Highlands County</a></li>
+                <li><a href="Hillsborough.php">Hillsborough County</a></li>
+                <li><a href="Holmes.php">Holmes County</a></li>
+                <li><a href="IndianRiver.php">Indian River County</a></li>
+                <li><a href="Jackson.php">Jackson County</a></li>
+                <li><a href="Jefferson.php">Jefferson County</a></li>
+                <li><a href="Lafayette.php">Lafayette County</a></li>
+                <li><a href="Lake.php">Lake County</a></li>
+                <li><a href="Lee.php">Lee County</a></li>
+                <li><a href="Leon.php">Leon County</a></li>
+                <li><a href="Levy.php">Levy County</a></li>
+                <li><a href="Liberty.php">Liberty County</a></li>
+                <li><a href="Madison.php">Madison County</a></li>
+                <li><a href="Manatee.php">Manatee County</a></li>
+                <li><a href="Marion.php">Marion County</a></li>
+                <li><a href="Martin.php">Martin County</a></li>
+                <li><a href="Monroe.php">Monroe County</a></li>
+                <li><a href="Nassau.php">Nassau County</a></li>
+                <li><a href="Okaloosa.php">Okaloosa County</a></li>
+                <li><a href="Okeechobee.php">Okeechobee County</a></li>
+                <li><a href="Orange.php">Orange County</a></li>
+                <li><a href="Osceola.php">Osceola County</a></li>
+                <li><a href="PalmBeach.php">Palm Beach County</a></li>
+                <li><a href="Pasco.php">Pasco County</a></li>
+                <li><a href="Pinellas.php">Pinellas County</a></li>
+                <li><a href="Polk.php">Polk County</a></li>
+                <li><a href="Putnam.php">Putnam County</a></li>
+                <li><a href="SaintJohns.php">Saint Johns County</a></li>
+                <li><a href="SaintLucie.php">Saint Lucie County</a></li>
+                <li><a href="SantaRosa.php">Santa Rosa County</a></li>
+                <li><a href="Sarasota.php">Sarasota County</a></li>
+                <li><a href="Seminole.php">Seminole County</a></li>
+                <li><a href="Sumter.php">Sumter County</a></li>
+                <li><a href="Suwannee.php">Suwannee County</a></li>
+                <li><a href="Taylor.php">Taylor County</a></li>
+                <li><a href="Union.php">Union County</a></li>
+                <li><a href="Volusia.php">Volusia County</a></li>
+                <li><a href="Wakulla.php">Wakulla County</a></li>
+                <li><a href="Walton.php">Walton County</a></li>
+                <li><a href="Washington.php">Washington County</a></li>
+            </ul>
+        </li>
+    </ul>
+    <div id="share-buttons" style="float: right; margin-right:3%; margin-top: 0.5%;">
+
+        <!-- Buffer -->
+        <a href="https://bufferapp.com/add?url=http://amendment1.tax&amp;text=Florida Amendment 1 Lookup" target="_blank">
+            <img src="https://simplesharebuttons.com/images/somacro/buffer.png" alt="Buffer" />
+        </a>
+
+        <!-- Twitter -->
+        <a href="https://twitter.com/share?url=http://amendment1.tax&amp;text=Florida%20Amendment%201%20Lookup:&amp;hashtags=amendment1.tax" target="_blank">
+            <img src="https://simplesharebuttons.com/images/somacro/twitter.png" alt="Twitter" />
+        </a>
+
+        <!-- Facebook -->
+        <a href="http://www.facebook.com/sharer.php?u=http://amendment1.tax" target="_blank">
+            <img src="https://simplesharebuttons.com/images/somacro/facebook.png" alt="Facebook" />
+        </a>
+
+        <!-- Google+ -->
+        <a href="https://plus.google.com/share?url=http://amendment1.tax" target="_blank">
+            <img src="https://simplesharebuttons.com/images/somacro/google.png" alt="Google" />
+        </a>
+
+        <!-- LinkedIn -->
+        <a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=http://amendment1.tax" target="_blank">
+            <img src="https://simplesharebuttons.com/images/somacro/linkedin.png" alt="LinkedIn" />
+        </a>
+
+        <!-- Email -->
+        <a href="mailto:?Subject=Florida Amendment 1 Lookup&amp;Body=Lookup your property at this site on Amendment 1: http://amendment1.tax">
+            <img src="https://simplesharebuttons.com/images/somacro/email.png" alt="Email" />
+        </a>
+
+        <!-- Print -->
+        <a href="javascript:;" onclick="window.print()">
+            <img src="https://simplesharebuttons.com/images/somacro/print.png" alt="Print" />
+        </a>
+
+    </div>
+</nav>
+
+ <!-- <canvas class="fade-in" id="revenue" style="position: relative; height: 80vh; width: 90vw;"></canvas> -->
+  <br />
+  <div class="fade-in" id="chart"></div>
+  <script type="text/javascript" defer="defer">
+      /* var ctx = document.getElementById('revenue').getContext('2d');
+      var drugOverdosesChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ["TAXES", "PERMITS, FEES, AND SPECIAL ASSESSMENTS", "INTERGOVERNMENTAL REVENUES", "CHARGES FOR SERVICES", "JUDGEMENTS, FINES, AND FORFEITS", "OTHER SOURCES"],
+        datasets: [{
+            label: "$ REVENUE",
+            data: [13814499461, 1803847427, 4555546163, 14879625833, 211851662, 8889795176],
+            backgroundColor: 'rgba(0, 20, 50, 0.7)',
+            borderColor: 'rgba(0, 20, 50, 1)',
+            borderWidth: 1,
+            fill: true
+          }]
+    },
+    options: {
+        responsive: true,
+        title: {
+          display: true,
+          position: "top",
+          text: "Florida County Government Revenues",
+          fontSize: 18,
+          fontColor: "#111"
+        },
+        scales: {
+          xAxes: [{ stacked: false, afterFit: function(scaleInstance) { scaleInstance.width = 10 } }],
+            yAxes: [{ stacked: false, ticks: { callback: function(value, index, values) { return '$' + value; } }, scaleLabel: { display: true, labelString: 'DOLLARS' } }]
+        },
+        tooltips: {
+          enabled: true,
+          mode:'index',
+          intersect: false,
+          callbacks: {
+            label: function(tooltipItems, data) {
+              var multistringText = ['$' + tooltipItems.yLabel];
+              return multistringText;
+
+            }
+          }
+        }
+    },
+   plugins: [{
+    beforeInit: function (chart) {
+      chart.data.labels.forEach(function (value, index, array) {
+        var a = [];
+        a.push(value.slice(0, 13));
+        var i = 1;
+        while(value.length > (i * 13)){
+          a.push(value.slice(i * 13, (i + 1) * 13));
+            i++;
+        }
+        array[index] = a;
+      })
+    }
+  }]
+}); */
+
+var chart = c3.generate({
+  bindto: d3.select('#chart'),
+  data: {
+    x: 'x',
+    columns: [
+      ['x', '2011', '2012', '2013', '2014', '2015', '2016'],
+      ['data1', 300, 200, 500, 400, 600, 500],
+      ['data2', 2000, 1300, 900, 2400, 1300, 2200],
+      ['data3', 3000, 2000, 1600, 4000, 2500, 2500],
+      ['data4', 2000, 1300, 900, 2400, 1300, 2200],
+      ['data5', 1300, 1200, 1500, 1400, 1600, 1500],
+      ['data6', 1000, 400, 800, 1200, 900, 2000],
+      ['data7', 900, 700, 200, 500, 600, 1200]
+    ],
+    names: {
+      data1: 'TAXES',
+      data2: 'PERMITS, FEES, AND SPECIAL ASSESSMENTS',
+      data3: 'INTERGOVERNMENTAL REVENUES',
+      data4: 'CHARGES FOR SERVICES',
+      data5: 'JUDGEMENTS, FINES, AND FORFEITS',
+      data6: 'MISCELLANEOUS REVENUES',
+      data7: 'OTHER SOURCES',
+    },
+    type: 'bar',
+    colors: {
+      data1: 'rgba(0, 51, 51, 0.7)',
+      data2: 'rgba(0, 0, 0, 0.9)',
+      data3: 'rgba(0, 20, 50, 0.3)',
+      data4: 'rgba(0, 20, 50, 0.7)',
+      data5: 'rgba(0, 10, 10, 0.8)',
+      data6: 'rgba(85, 85, 85, 0.7)',
+      data7: 'rgba(49, 79, 79, 0.7)'
+    }
+  },
+  bar: {
+    width: {
+      ratio: 0.8 // this makes bar width x% of length between ticks
+    }
+  },
+  axis: {
+    x: {
+      tick: {
+        values: ['2011', '2012', '2013', '2014', '2015', '2016']
+      }
+    },
+    y: {
+      tick: {
+        format: function (value) { return '$' + d3.format(",")(value); }
+      }
+    }
+  },
+  title: {
+    text: 'County Government Revenues'
+  },
+  zoom: {
+    enabled: true
+  }
+});
+
+  </script>
+
+</body>
+</html>
